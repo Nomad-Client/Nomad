@@ -4,412 +4,242 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nomad Client</title>
-    <!-- Volkswagen Bold Font - Add font file to your project -->
-    <style>
-        @font-face {
-            font-family: 'Volkswagen';
-            src: url('Volkswagen-Bold.woff2') format('woff2'),
-                 url('Volkswagen-Bold.otf') format('otf'),
-                 url('Volkswagen-Bold.ttf') format('truetype');
-            font-weight: bold;
-            font-style: normal;
-        }
-    </style>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: Arial, sans-serif !important;
         }
 
         body {
-            font-family: 'Volkswagen', sans-serif;
-            background: linear-gradient(135deg, #0a0a0f 0%, #0d1117 25%, #0a1628 50%, #0d1117 75%, #0a0a0f 100%);
-            min-height: 100vh;
-            color: #ffffff;
+            font-family: Arial, sans-serif;
+            background: #080808;
+            color: #fff;
             overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
+        h1, h2, h3 {
+            font-family: Arial, sans-serif;
         }
 
-        /* Hero Section */
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .snow {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .snow span {
+            position: absolute;
+            top: -10px;
+            background: #fff;
+            border-radius: 50%;
+            animation: snowfall linear infinite;
+        }
+
+        @keyframes snowfall {
+            from { transform: translateY(-10px); }
+            to { transform: translateY(110vh); }
+        }
+
+        .hero, .features, .video-section, .download-section, .faq, footer {
+            position: relative;
+            z-index: 2;
+        }
+
         .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 80px 20px;
+            padding: 40px;
         }
 
         .hero h1 {
-            font-family: 'Volkswagen', sans-serif;
-            font-size: 4rem;
-            font-weight: 900;
-            color: #00d4ff;
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.8),
-                         0 0 20px rgba(0, 212, 255, 0.6),
-                         0 0 30px rgba(0, 212, 255, 0.4),
-                         0 0 40px rgba(0, 212, 255, 0.2);
-            letter-spacing: 4px;
-            margin-bottom: 20px;
+            font-size: clamp(4rem, 10vw, 8rem);
+            letter-spacing: -4px;
         }
 
-        .hero p {
-            font-size: 1.5rem;
-            color: #b8c5d6;
-            margin-bottom: 40px;
-            font-weight: 300;
+        .hero-main {
+            font-size: 1.4rem;
+            margin-top: 20px;
+        }
+
+        .hero-sub {
+            max-width: 700px;
+            color: #999;
+            margin: 15px auto 40px;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 20px;
-            justify-content: center;
+            gap: 15px;
             flex-wrap: wrap;
         }
 
         .btn {
-            padding: 16px 40px;
-            font-family: 'Volkswagen', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
+            padding: 14px 28px;
             text-decoration: none;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
+            border-radius: 6px;
         }
 
         .btn-primary {
-            color: #0a0a0f;
-            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5),
-                        0 0 40px rgba(0, 212, 255, 0.3),
-                        0 0 60px rgba(0, 212, 255, 0.1);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.7),
-                        0 0 50px rgba(0, 212, 255, 0.5),
-                        0 0 70px rgba(0, 212, 255, 0.3);
-            background: linear-gradient(135deg, #00e5ff 0%, #00b8e6 100%);
+            background: #fff;
+            color: #000;
         }
 
         .btn-secondary {
-            color: #00d4ff;
-            background: transparent;
-            border: 2px solid #00d4ff;
-            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+            border: 1px solid #333;
+            color: #fff;
         }
 
-        .btn-secondary:hover {
-            background: rgba(0, 212, 255, 0.1);
-            transform: translateY(-3px);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        .features, .video-section, .download-section, .faq {
+            padding: 100px 0;
         }
 
-        /* Features Section */
-        .features {
-            padding: 80px 20px;
-        }
-
-        .features h2 {
-            font-family: 'Volkswagen', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: #00d4ff;
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
-            margin-bottom: 50px;
-            letter-spacing: 2px;
+        h2 {
             text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .feature-card {
-            background: rgba(13, 17, 23, 0.8);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 12px;
-            padding: 30px;
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover {
-            border-color: rgba(0, 212, 255, 0.5);
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
-            transform: translateY(-5px);
-        }
-
-        .feature-card h3 {
-            font-family: 'Volkswagen', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #00d4ff;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
-        }
-
-        .feature-card p {
-            color: #b8c5d6;
-            line-height: 1.6;
-            font-weight: 300;
-        }
-
-        /* Download Section */
-        .download-section {
-            padding: 80px 20px;
-            text-align: center;
-        }
-
-        .download-section h2 {
-            font-family: 'Volkswagen', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: #00d4ff;
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
-            margin-bottom: 30px;
-            letter-spacing: 2px;
-        }
-
-        /* FAQ Section */
-        .faq {
-            padding: 80px 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq h2 {
-            font-family: 'Volkswagen', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: #00d4ff;
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
-            margin-bottom: 40px;
-            letter-spacing: 2px;
-            text-align: center;
-        }
-
-        .faq-item {
-            background: rgba(13, 17, 23, 0.8);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-        }
-
-        .faq-item h3 {
-            font-family: 'Volkswagen', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #00d4ff;
-            margin-bottom: 10px;
-        }
-
-        .faq-item p {
-            color: #b8c5d6;
-            line-height: 1.6;
-            font-weight: 300;
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(10, 10, 15, 0.9);
-            border-top: 1px solid rgba(0, 212, 255, 0.2);
-            padding: 60px 20px 30px;
-            margin-top: 80px;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
+            gap: 20px;
         }
 
-        .footer-section h4 {
-            font-family: 'Volkswagen', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #00d4ff;
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+        .feature-card, .faq-item {
+            background: #101010;
+            border: 1px solid #222;
+            border-radius: 10px;
+            padding: 28px;
         }
 
-        .footer-section p {
-            color: #b8c5d6;
-            margin-bottom: 10px;
-            font-weight: 300;
+        .feature-card p, .faq-item p {
+            color: #999;
         }
 
-        .footer-section a {
-            color: #b8c5d6;
-            text-decoration: none;
-            transition: color 0.3s ease;
+        .video-wrapper {
+            max-width: 1000px;
+            margin: auto;
+            border: 1px solid #222;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #111;
+        }
+
+        .video-wrapper iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: none;
             display: block;
-            margin-bottom: 10px;
         }
 
-        .footer-section a:hover {
-            color: #00d4ff;
+        .download-section {
+            text-align: center;
+        }
+
+        footer {
+            border-top: 1px solid #222;
+            padding: 40px 20px;
         }
 
         .footer-bottom {
-            max-width: 1200px;
-            margin: 40px auto 0;
-            padding-top: 30px;
-            border-top: 1px solid rgba(0, 212, 255, 0.1);
             text-align: center;
-            color: #6b7280;
-            font-size: 0.9rem;
-        }
-
-        .footer-bottom span {
-            color: #00d4ff;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .features h2,
-            .download-section h2,
-            .faq h2 {
-                font-size: 1.8rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-        }
-
-        /* Subtle animated background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at 20% 20%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
-                        radial-gradient(ellipse at 80% 80%, rgba(0, 100, 150, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: -1;
+            color: #777;
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
+    <div class="snow"></div>
+
     <section class="hero">
-        <h1>Nomad Client</h1>
-        <p>Nowy najlepszy client właśnie wystartował!</p>
+        <h1>NOMAD</h1>
+        <p class="hero-main">Poczuj przewagę dzięki naszemu rozwiązaniu.</p>
+        <p class="hero-sub">Świetne moduły, dopracowana oprawa wizualna i optymalizacja — wszystko w Nomad Client.</p>
         <div class="hero-buttons">
-            <a href="https://drive.google.com/your-link-here" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Pobierz</a>
-            <a href="#features" class="btn btn-secondary">Zobacz funkcje</a>
+            <a href="#" class="btn btn-primary">Pobierz</a>
+            <a href="#features" class="btn btn-secondary">Dlaczego my?</a>
         </div>
     </section>
 
-    <!-- Features Section -->
     <section class="features" id="features">
         <div class="container">
-            <h2>Co dostajesz w Nomad Client?</h2>
+            <h2>Dlaczego warto wybrać Nomad?</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <h3>Wydajność</h3>
-                    <p>Nie wiem mamy fps spoofera.</p>
+                    <h3>Świetne moduły</h3>
+                    <p>Dopracowane funkcje stworzone z myślą o wygodzie, wydajności i codziennej rozgrywce.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Dopracowane moduły</h3>
-                    <p>Najlepsza KillAura, oraz wiele innych dojebanych modulow.</p>
+                    <h3>Regularne aktualizacje</h3>
+                    <p>Client jest stale rozwijany i ulepszany, aby zapewnić najlepsze możliwe doświadczenie.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Wygląd</h3>
-                    <p>Minimalistyczny czarno-niebieski UI.</p>
+                    <h3>Aktywna pomoc</h3>
+                    <p>Szybkie wsparcie oraz pomoc w konfiguracji i rozwiązywaniu problemów.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Download Section -->
+    <section class="video-section">
+        <div class="container">
+            <h2>Obejrzyj naszego cheata w akcji</h2>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Nomad Client Showcase" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
     <section class="download-section">
         <div class="container">
             <h2>Pobierz Nomad Client</h2>
-            <div class="hero-buttons">
-                <a href="https://drive.google.com/your-link-here" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Pobierz</a>
-            </div>
+            <a href="#" class="btn btn-primary">Pobierz</a>
         </div>
     </section>
 
-    <!-- FAQ Section -->
     <section class="faq">
         <div class="container">
             <h2>FAQ</h2>
             <div class="faq-item">
-                <h3>Na jaką wersje jest Nomad Client?</h3>
-                <p>Nomad Client jest na wersję 1.21.11 fabric.</p>
+                <h3>Na jaką wersję jest Nomad Client?</h3>
+                <p>Nomad Client działa na Fabric 1.21.1.</p>
             </div>
             <div class="faq-item">
-                <h3>Gdzie pobiorę Moda?</h3>
-                <p>Moda możesz pobrać bezpośrednio z przycisku "Pobierz" na naszej stronie.</p>
+                <h3>Gdzie mogę pobrać klienta?</h3>
+                <p>Skorzystaj z przycisku „Pobierz” znajdującego się na stronie.</p>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Nomad Client</h4>
-                <p>made by _ryba</p>
-            </div>
-            <div class="footer-section">
-                <h4>Szybkie linki</h4>
-                <a href="#">Home</a>
-                <a href="#features">Funkcje</a>
-                <a href="#faq">FAQ</a>
-            </div>
-            <div class="footer-section">
-                <h4>Kontakt</h4>
-                <p>Discord: nie ma kurwa mac  czasu nie mam na ten shit jebac antka golembe</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Nomad Client. Wszelkie prawa zastrzeżone.</p>
-        </div>
+        <div class="footer-bottom">© 2026 Nomad Client</div>
     </footer>
+
+    <script>
+        const snowContainer = document.querySelector('.snow');
+        for (let i = 0; i < 120; i++) {
+            const s = document.createElement('span');
+            s.style.left = Math.random() * 100 + 'vw';
+            const size = Math.random() * 4 + 2;
+            s.style.width = size + 'px';
+            s.style.height = size + 'px';
+            s.style.opacity = Math.random();
+            s.style.animationDuration = (Math.random() * 8 + 6) + 's';
+            s.style.animationDelay = (Math.random() * 10) + 's';
+            snowContainer.appendChild(s);
+        }
+    </script>
 </body>
 </html>

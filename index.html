@@ -19,8 +19,39 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3 {
-            font-family: Arial, sans-serif;
+        /* Language Selector */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #0a0a0a;
+            border-bottom: 1px solid #222;
+            z-index: 1000;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .language-selector label {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .language-selector select {
+            background: #101010;
+            color: #fff;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 0.95rem;
+            cursor: pointer;
         }
 
         .container {
@@ -29,13 +60,7 @@
             padding: 0 20px;
         }
 
-        .snow {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 1;
-        }
-
+        .snow { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
         .snow span {
             position: absolute;
             top: -10px;
@@ -62,6 +87,7 @@
             align-items: center;
             text-align: center;
             padding: 40px;
+            padding-top: 80px; /* miejsce na top-bar */
         }
 
         .hero h1 {
@@ -69,16 +95,8 @@
             letter-spacing: -4px;
         }
 
-        .hero-main {
-            font-size: 1.4rem;
-            margin-top: 20px;
-        }
-
-        .hero-sub {
-            max-width: 700px;
-            color: #999;
-            margin: 15px auto 40px;
-        }
+        .hero-main { font-size: 1.4rem; margin-top: 20px; }
+        .hero-sub { max-width: 700px; color: #999; margin: 15px auto 40px; }
 
         .hero-buttons {
             display: flex;
@@ -92,25 +110,14 @@
             border-radius: 6px;
         }
 
-        .btn-primary {
-            background: #fff;
-            color: #000;
-        }
-
-        .btn-secondary {
-            border: 1px solid #333;
-            color: #fff;
-        }
+        .btn-primary { background: #fff; color: #000; }
+        .btn-secondary { border: 1px solid #333; color: #fff; }
 
         .features, .video-section, .download-section, .faq {
             padding: 100px 0;
         }
 
-        h2 {
-            text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 50px;
-        }
+        h2 { text-align: center; font-size: 2.2rem; margin-bottom: 50px; }
 
         .features-grid {
             display: grid;
@@ -125,9 +132,7 @@
             padding: 28px;
         }
 
-        .feature-card p, .faq-item p {
-            color: #999;
-        }
+        .feature-card p, .faq-item p { color: #999; }
 
         .video-wrapper {
             max-width: 1000px;
@@ -142,12 +147,9 @@
             width: 100%;
             aspect-ratio: 16/9;
             border: none;
-            display: block;
         }
 
-        .download-section {
-            text-align: center;
-        }
+        .download-section { text-align: center; }
 
         footer {
             border-top: 1px solid #222;
@@ -161,33 +163,45 @@
     </style>
 </head>
 <body>
+    <!-- Language Selector -->
+    <div class="top-bar">
+        <div class="language-selector">
+            <label for="language-select">Język:</label>
+            <select id="language-select">
+                <option value="pl">Polski</option>
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+            </select>
+        </div>
+    </div>
+
     <div class="snow"></div>
 
     <section class="hero">
-        <h1>NOMAD</h1>
-        <p class="hero-main">Poczuj przewagę dzięki naszemu rozwiązaniu.</p>
-        <p class="hero-sub">Świetne moduły, dopracowana oprawa wizualna i optymalizacja — wszystko w Nomad Client.</p>
+        <h1 data-translate="title">NOMAD</h1>
+        <p class="hero-main" data-translate="hero-main">Poczuj przewagę dzięki naszemu rozwiązaniu.</p>
+        <p class="hero-sub" data-translate="hero-sub">Świetne moduły, dopracowana oprawa wizualna i optymalizacja — wszystko w Nomad Client.</p>
         <div class="hero-buttons">
-            <a href="#" class="btn btn-primary">Pobierz</a>
-            <a href="#features" class="btn btn-secondary">Dlaczego my?</a>
+            <a href="#" class="btn btn-primary" data-translate="download">Pobierz</a>
+            <a href="#features" class="btn btn-secondary" data-translate="why-us">Dlaczego my?</a>
         </div>
     </section>
 
     <section class="features" id="features">
         <div class="container">
-            <h2>Dlaczego warto wybrać Nomad?</h2>
+            <h2 data-translate="why-title">Dlaczego warto wybrać Nomad?</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <h3>Świetne moduły</h3>
-                    <p>Dopracowane funkcje stworzone z myślą o wygodzie, wydajności i codziennej rozgrywce.</p>
+                    <h3 data-translate="feature1-title">Świetne moduły</h3>
+                    <p data-translate="feature1-text">Dopracowane funkcje stworzone z myślą o wygodzie, wydajności i codziennej rozgrywce.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Regularne aktualizacje</h3>
-                    <p>Client jest stale rozwijany i ulepszany, aby zapewnić najlepsze możliwe doświadczenie.</p>
+                    <h3 data-translate="feature2-title">Regularne aktualizacje</h3>
+                    <p data-translate="feature2-text">Client jest stale rozwijany i ulepszany, aby zapewnić najlepsze możliwe doświadczenie.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Aktywna pomoc</h3>
-                    <p>Szybkie wsparcie oraz pomoc w konfiguracji i rozwiązywaniu problemów.</p>
+                    <h3 data-translate="feature3-title">Aktywna pomoc</h3>
+                    <p data-translate="feature3-text">Szybkie wsparcie oraz pomoc w konfiguracji i rozwiązywaniu problemów.</p>
                 </div>
             </div>
         </div>
@@ -195,7 +209,7 @@
 
     <section class="video-section">
         <div class="container">
-            <h2>Watch our client in action</h2>
+            <h2 data-translate="video-title">Watch our client in action</h2>
             <div class="video-wrapper">
                 <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Nomad Client Showcase" allowfullscreen></iframe>
             </div>
@@ -204,30 +218,31 @@
 
     <section class="download-section">
         <div class="container">
-            <h2>Pobierz Nomad Client</h2>
-            <a href="#" class="btn btn-primary">Pobierz</a>
+            <h2 data-translate="download-title">Pobierz Nomad Client</h2>
+            <a href="#" class="btn btn-primary" data-translate="download">Pobierz</a>
         </div>
     </section>
 
     <section class="faq">
         <div class="container">
-            <h2>FAQ</h2>
+            <h2 data-translate="faq-title">FAQ</h2>
             <div class="faq-item">
-                <h3>Na jaką wersję jest Nomad Client?</h3>
-                <p>Nomad Client działa na Fabric 1.21.11.</p>
+                <h3 data-translate="faq1-q">Na jaką wersję jest Nomad Client?</h3>
+                <p data-translate="faq1-a">Nomad Client działa na Fabric 1.21.1.</p>
             </div>
             <div class="faq-item">
-                <h3>Gdzie mogę pobrać klienta?</h3>
-                <p>Skorzystaj z przycisku „Pobierz” znajdującego się na stronie.</p>
+                <h3 data-translate="faq2-q">Gdzie mogę pobrać klienta?</h3>
+                <p data-translate="faq2-a">Skorzystaj z przycisku „Pobierz” znajdującego się na stronie.</p>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="footer-bottom">© 2026 Nomad Client</div>
+        <div class="footer-bottom" data-translate="footer">© 2026 Nomad Client</div>
     </footer>
 
     <script>
+        // Snow effect
         const snowContainer = document.querySelector('.snow');
         for (let i = 0; i < 120; i++) {
             const s = document.createElement('span');
@@ -240,6 +255,94 @@
             s.style.animationDelay = (Math.random() * 10) + 's';
             snowContainer.appendChild(s);
         }
+
+        // Translations
+        const translations = {
+            pl: {
+                "title": "NOMAD",
+                "hero-main": "Poczuj przewagę dzięki naszemu rozwiązaniu.",
+                "hero-sub": "Świetne moduły, dopracowana oprawa wizualna i optymalizacja — wszystko w Nomad Client.",
+                "download": "Pobierz",
+                "why-us": "Dlaczego my?",
+                "why-title": "Dlaczego warto wybrać Nomad?",
+                "feature1-title": "Świetne moduły",
+                "feature1-text": "Dopracowane funkcje stworzone z myślą o wygodzie, wydajności i codziennej rozgrywce.",
+                "feature2-title": "Regularne aktualizacje",
+                "feature2-text": "Client jest stale rozwijany i ulepszany, aby zapewnić najlepsze możliwe doświadczenie.",
+                "feature3-title": "Aktywna pomoc",
+                "feature3-text": "Szybkie wsparcie oraz pomoc w konfiguracji i rozwiązywaniu problemów.",
+                "video-title": "Obejrzyj klienta w akcji",
+                "download-title": "Pobierz Nomad Client",
+                "faq-title": "FAQ",
+                "faq1-q": "Na jaką wersję jest Nomad Client?",
+                "faq1-a": "Nomad Client działa na Fabric 1.21.1.",
+                "faq2-q": "Gdzie mogę pobrać klienta?",
+                "faq2-a": "Skorzystaj z przycisku „Pobierz” znajdującego się na stronie.",
+                "footer": "© 2026 Nomad Client"
+            },
+            en: {
+                "title": "NOMAD",
+                "hero-main": "Feel the advantage with our solution.",
+                "hero-sub": "Great modules, refined visuals and optimization — all in Nomad Client.",
+                "download": "Download",
+                "why-us": "Why us?",
+                "why-title": "Why choose Nomad?",
+                "feature1-title": "Great Modules",
+                "feature1-text": "Well-crafted features designed for convenience, performance and daily gameplay.",
+                "feature2-title": "Regular Updates",
+                "feature2-text": "The client is constantly developed and improved for the best possible experience.",
+                "feature3-title": "Active Support",
+                "feature3-text": "Fast support and help with configuration and problem solving.",
+                "video-title": "Watch our client in action",
+                "download-title": "Download Nomad Client",
+                "faq-title": "FAQ",
+                "faq1-q": "What version is Nomad Client for?",
+                "faq1-a": "Nomad Client works on Fabric 1.21.1.",
+                "faq2-q": "Where can I download the client?",
+                "faq2-a": "Use the 'Download' button on the page.",
+                "footer": "© 2026 Nomad Client"
+            },
+            ru: {
+                "title": "NOMAD",
+                "hero-main": "Почувствуй преимущество с нашим решением.",
+                "hero-sub": "Отличные модули, проработанный визуал и оптимизация — всё в Nomad Client.",
+                "download": "Скачать",
+                "why-us": "Почему мы?",
+                "why-title": "Почему стоит выбрать Nomad?",
+                "feature1-title": "Отличные модули",
+                "feature1-text": "Проработанные функции, созданные для удобства, производительности и ежедневной игры.",
+                "feature2-title": "Регулярные обновления",
+                "feature2-text": "Клиент постоянно развивается и улучшается для лучшего опыта.",
+                "feature3-title": "Активная поддержка",
+                "feature3-text": "Быстрая поддержка и помощь в настройке и решении проблем.",
+                "video-title": "Посмотрите клиента в действии",
+                "download-title": "Скачать Nomad Client",
+                "faq-title": "FAQ",
+                "faq1-q": "Для какой версии Nomad Client?",
+                "faq1-a": "Nomad Client работает на Fabric 1.21.1.",
+                "faq2-q": "Где я могу скачать клиента?",
+                "faq2-a": "Используйте кнопку «Скачать» на странице.",
+                "footer": "© 2026 Nomad Client"
+            }
+        };
+
+        // Language switcher
+        const langSelect = document.getElementById('language-select');
+
+        function changeLanguage(lang) {
+            document.documentElement.lang = lang;
+            
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.getAttribute('data-translate');
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        langSelect.addEventListener('change', (e) => {
+            changeLanguage(e.target.value);
+        });
     </script>
 </body>
 </html>

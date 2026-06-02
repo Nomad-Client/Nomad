@@ -560,6 +560,25 @@
 
         /* ── MISC ── */
         .section-bg-alt { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+        @media (max-width: 640px) {
+            .navbar { padding: 0 16px; height: 56px; }
+            .nav-center { display: none; }
+            .nav-download-btn { padding: 7px 14px; font-size: 0.8rem; }
+            .language-selector select { padding: 5px 7px; font-size: 0.8rem; }
+            .nav-right { gap: 8px; }
+            .container { padding: 0 18px; }
+            .hero { padding: 90px 18px 50px; }
+            .section { padding: 70px 0; }
+            .features-grid { grid-template-columns: 1fr; }
+            h2 { font-size: 1.9rem; letter-spacing: -1px; }
+            .hero h1 { letter-spacing: -3px; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .btn { width: 100%; justify-content: center; }
+            .faq-list { padding: 0; }
+            #scrollTop { bottom: 20px; right: 16px; }
+            .download-counter { padding: 12px 16px; font-size: 0.85rem; }
+        }
     </style>
 </head>
 <body>

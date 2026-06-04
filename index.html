@@ -579,7 +579,15 @@
             #scrollTop { bottom: 20px; right: 16px; }
             .download-counter { padding: 12px 16px; font-size: 0.85rem; }
         }
-    </style>
+    
+.download-modal{position:fixed;inset:0;background:rgba(0,0,0,.92);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:.3s;z-index:99999}
+.download-modal.active{opacity:1;visibility:visible}
+.download-modal-content{width:min(800px,92%);background:var(--bg2);border:1px solid var(--border2);border-radius:18px;padding:30px}
+.close-modal{float:right;background:var(--bg3);border:1px solid var(--border);color:white;width:42px;height:42px;border-radius:10px;cursor:pointer}
+.version-card{margin-top:20px;background:var(--bg3);border:1px solid var(--border);padding:20px;border-radius:12px}
+.latest-badge{color:var(--accent2);font-weight:700}
+
+</style>
 </head>
 <body>
 
@@ -604,7 +612,7 @@
                 <option value="ru">🇷🇺 RU</option>
             </select>
         </div>
-        <a href="#download" class="nav-download-btn" data-translate="download">↓ Pobierz</a>
+        <a href="#" onclick="openDownloadModal();return false;" class="nav-download-btn" data-translate="download">↓ Pobierz</a>
     </div>
 </nav>
 
@@ -619,7 +627,7 @@
     <p class="hero-main" data-translate="hero-main">Poczuj przewagę dzięki naszemu rozwiązaniu.</p>
     <p class="hero-sub" data-translate="hero-sub">Świetne moduły, dopracowana oprawa wizualna i optymalizacja — wszystko w Nomad Client.</p>
     <div class="hero-buttons">
-        <a href="#download" class="btn btn-primary" data-translate="download">↓ Pobierz</a>
+        <a href="#" onclick="openDownloadModal();return false;" class="btn btn-primary" data-translate="download">↓ Pobierz</a>
         <a href="#features" class="btn btn-secondary" data-translate="why-us">Dlaczego my?</a>
     </div>
 </section>
@@ -693,7 +701,7 @@
         </div>
 
         <div class="reveal">
-            <a href="https://drive.google.com" target="_blank" class="btn btn-primary" id="main-download-btn" data-translate="download" onclick="countDownload()">↓ Pobierz</a>
+            <a href="#" class="btn btn-primary" id="main-download-btn" data-translate="download" onclick="openDownloadModal();return false;">↓ Pobierz</a>
         </div>
         <p style="color:var(--muted);font-size:0.78rem;margin-top:16px" class="reveal" data-translate="download-note">Klikając pobierasz wersję dla Fabric 1.21.11</p>
     </div>
@@ -1043,6 +1051,30 @@ function changeLanguage(lang) {
 }
 
 langSelect.addEventListener('change', e => changeLanguage(e.target.value));
+</script>
+
+<div id="downloadModal" class="download-modal">
+<div class="download-modal-content">
+<button class="close-modal" onclick="closeDownloadModal()">×</button>
+<h2>Downloads</h2>
+<p class="download-sub">Fabric 1.21.11</p>
+
+<div class="version-card">
+<h3>Beta v0.3 <span class="latest-badge">Latest Release</span></h3>
+<p>• New ClickGUI<br>• Performance improvements<br>• Stability fixes<br>• Bug fixes</p>
+<a href="https://example.com" target="_blank" class="btn btn-primary" onclick="countDownload()">Download Beta v0.3</a>
+</div>
+
+<div class="version-card">
+<h3>Closed Beta</h3>
+<p>Beta v0.1 and Beta v0.2 were private testing builds and are no longer available.</p>
+</div>
+</div>
+</div>
+
+<script>
+function openDownloadModal(){document.getElementById('downloadModal').classList.add('active');}
+function closeDownloadModal(){document.getElementById('downloadModal').classList.remove('active');}
 </script>
 </body>
 </html>
